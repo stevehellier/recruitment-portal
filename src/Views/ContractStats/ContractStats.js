@@ -8,12 +8,11 @@ import { Api } from '../../Services';
 const ContractStatsPage = () => {
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState([]);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const getRecuiterStats = async (startDate, endDate) => {
     setLoading(true);
-    console.log(startDate, endDate);
     let recruiterStats = null;
     try {
       if (startDate == null || startDate === '' || startDate === 'undefined') {
@@ -83,6 +82,7 @@ const ContractStatsPage = () => {
   const handleClearFormClick = () => {
     setStartDate(null);
     setEndDate(null);
+    getRecuiterStats();
   };
 
   useEffect(() => {
