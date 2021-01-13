@@ -1,14 +1,17 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
+import { Container } from 'react-bootstrap';
 
 import './PageHeader.css';
 
 class PageHeader extends Component {
   render() {
     return (
-      <div id='page-header'>
-        <h1>{this.props.Text}</h1>
-      </div>
-    )
+      <Container fluid>
+        <div id='page-header'>
+          <h1>{this.props.Text}</h1>
+        </div>
+      </Container>
+    );
   }
 }
 

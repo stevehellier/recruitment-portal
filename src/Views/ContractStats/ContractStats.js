@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { withRouter } from 'react-router';
-import { SideNav, PageHeader, DateSearch } from '../../Components';
+import { PageHeader, DateSearch } from '../../Components';
 import { Api } from '../../Services';
 
 const ContractStatsPage = () => {
@@ -49,10 +49,10 @@ const ContractStatsPage = () => {
     return (
       <tr key={index}>
         <td>{recruiter.RecruiterName}</td>
-        <td>{recruiter.CandidateCalls}</td>
-        <td>{recruiter.Emailed}</td>
-        <td>{recruiter.Accepted}</td>
-        <td>{recruiter.Confirmed}</td>
+        <td className='text-center'>{recruiter.CandidateCalls}</td>
+        <td className='text-center'>{recruiter.Emailed}</td>
+        <td className='text-center'>{recruiter.Accepted}</td>
+        <td className='text-center'>{recruiter.Confirmed}</td>
       </tr>
     );
   };
@@ -93,37 +93,32 @@ const ContractStatsPage = () => {
 
   return (
     <>
-      <Container fluid>
-        <Row>
-          <Col xs={2} id='sidebar-wrapper'>
-            <SideNav />
-          </Col>
-          <Col xs={10} id='page-content-wrapper'>
-            <PageHeader Text='Recruiter Stats (Contract)' />
-            <DateSearch
-              handleClearFormClick={handleClearFormClick}
-              onSearchButtonClick={onSearchButtonClick}
-              startDate={startDate}
-              endDate={endDate}
-              handleStartDateChange={handleStartDateChange}
-              handleEndDateChange={handleEndDateChange}
-              loading={loading}
-            />
-            <Table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Candidate Calls</th>
-                  <th>Emailed</th>
-                  <th>Accepted</th>
-                  <th>Confirmed</th>
-                </tr>
-              </thead>
-              <tbody>{stats.map(renderRecruiter)}</tbody>
-            </Table>
-          </Col>
-        </Row>
-      </Container>
+      <div className='container-fluid'>
+        <PageHeader Text='Recruiter Stats (Contract)' />
+        <DateSearch
+          handleClearFormClick={handleClearFormClick}
+          onSearchButtonClick={onSearchButtonClick}
+          startDate={startDate}
+          endDate={endDate}
+          handleStartDateChange={handleStartDateChange}
+          handleEndDateChange={handleEndDateChange}
+          loading={loading}
+        />
+        {!loading && (
+          <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th className='text-center'>Candidate Calls</th>
+                <th className='text-center'>Emailed</th>
+                <th className='text-center'>Accepted</th>
+                <th className='text-center'>Confirmed</th>
+              </tr>
+            </thead>
+            <tbody>{stats.map(renderRecruiter)}</tbody>
+          </Table>
+        )}
+      </div>
     </>
   );
 };

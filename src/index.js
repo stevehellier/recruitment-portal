@@ -5,16 +5,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 // import App from './App';
 import { Routes } from './routes';
-
+import { NavBar } from './Components/index';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+
   <Router>
+  <NavBar />
     <Routes />
   </Router>,
   // <React.StrictMode>
   //   <App />
-  // </React.StrictMode>,
+  // </React.StrictMode>
   document.getElementById('root'),
 );
 

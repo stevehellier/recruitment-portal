@@ -1,6 +1,11 @@
-.NavBar {
-  background-color: black;
-  font-size: 20px;
-  color: white;
-  height: 70px;
+.navbar {
+  justify-content: unset;
+}
+.navbar-nav {
+  flex-direction: row;
+}
+
+.navbar-nav > li{
+  margin-left:10px;
+  margin-right:10px;
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 
 import { withRouter } from 'react-router';
-import { SideNav, PageHeader, DateSearch } from '../../Components';
+import { PageHeader, DateSearch } from '../../Components';
 import { Api } from '../../Services';
 
 const PermStatsPage = () => {
@@ -49,13 +49,13 @@ const PermStatsPage = () => {
     return (
       <tr key={index}>
         <td>{recruiter.RecruiterName}</td>
-        <td>{recruiter.CandidateCalls}</td>
-        <td>{recruiter.ClientCalls}</td>
-        <td>{recruiter.VacanciesCreated}</td>
-        <td>{recruiter.Interviews}</td>
-        <td>{recruiter.Emailed}</td>
-        <td>{recruiter.Offers}</td>
-        <td>{recruiter.Invoiced}</td>
+        <td className='text-center'>{recruiter.CandidateCalls}</td>
+        <td className='text-center'>{recruiter.ClientCalls}</td>
+        <td className='text-center'>{recruiter.VacanciesCreated}</td>
+        <td className='text-center'>{recruiter.Interviews}</td>
+        <td className='text-center'>{recruiter.Emailed}</td>
+        <td className='text-center'>{recruiter.Offers}</td>
+        <td className='text-center'>{recruiter.Invoiced}</td>
       </tr>
     );
   };
@@ -96,38 +96,31 @@ const PermStatsPage = () => {
   return (
     <>
       <Container fluid>
-        <Row>
-          <Col xs={2} id='sidebar-wrapper'>
-            <SideNav />
-          </Col>
-          <Col xs={10} id='page-content-wrapper'>
-            <PageHeader Text='Recruiter Stats (Perm)' />
-            <DateSearch
-              handleClearFormClick={handleClearFormClick}
-              onSearchButtonClick={onSearchButtonClick}
-              startDate={startDate}
-              endDate={endDate}
-              handleStartDateChange={handleStartDateChange}
-              handleEndDateChange={handleEndDateChange}
-              loading={loading}
-            />
-            <Table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Candidate Calls</th>
-                  <th>Client Calls</th>
-                  <th>Vancancies Created</th>
-                  <th>Interviews</th>
-                  <th>Emailed</th>
-                  <th>Offers</th>
-                  <th>Invoiced</th>
-                </tr>
-              </thead>
-              <tbody>{stats.map(renderRecruiter)}</tbody>
-            </Table>
-          </Col>
-        </Row>
+        <PageHeader Text='Recruiter Stats (Perm)' />
+        <DateSearch
+          handleClearFormClick={handleClearFormClick}
+          onSearchButtonClick={onSearchButtonClick}
+          startDate={startDate}
+          endDate={endDate}
+          handleStartDateChange={handleStartDateChange}
+          handleEndDateChange={handleEndDateChange}
+          loading={loading}
+        />
+        <Table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th className='text-center'>Candidate Calls</th>
+              <th className='text-center'>Client Calls</th>
+              <th className='text-center'>Vancancies Created</th>
+              <th className='text-center'>Interviews</th>
+              <th className='text-center'>Emailed</th>
+              <th className='text-center'>Offers</th>
+              <th className='text-center'>Invoiced</th>
+            </tr>
+          </thead>
+          <tbody>{stats.map(renderRecruiter)}</tbody>
+        </Table>
       </Container>
     </>
   );
