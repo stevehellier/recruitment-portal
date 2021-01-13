@@ -1,0 +1,14 @@
+
+.button__clear {
+  padding: 5px;
+  margin: 5px;
+}
+
+.button__search {
+  padding: 5px;
+  margin: 5px;
+}
+
+.datepicker {
+  text-align: center;
+}
