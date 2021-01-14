@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { withRouter } from 'react-router';
 import { PageHeader, DateSearch } from '../../Components';
 import { Api } from '../../Services';
 
-const PermStatsPage = () => {
+const RecruitersActivityPage = () => {
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState([]);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [statsCount, setStatsCount] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const getRecuiterStats = async (startDate, endDate) => {
     setLoading(true);
     let recruiterStats = null;
     try {
-      if (startDate == null || startDate === '') {
-        recruiterStats = await Api().get(`/Recruiters/GetPermRecruitersStats`);
+      if (startDate == null || startDate === '' || startDate === 'undefined') {
+        recruiterStats = await Api().get(`/Recruiters/GetRecruitersActivity`);
       } else {
         let startYear = startDate.getFullYear();
         let startMonth = ('0' + (startDate.getMonth() + 1)).slice(-2);
@@ -29,10 +30,11 @@ const PermStatsPage = () => {
         let myEnd = `${endYear}-${endMonth}-${endDay}`;
 
         recruiterStats = await Api().get(
-          `/Recruiters/GetPermRecruitersStats?startDate=${myStart}&endDate=${myEnd}`,
+          `/Recruiters/GetRecruitersActivity?startDate=${myStart}&endDate=${myEnd}`,
         );
       }
       setStats(recruiterStats.data);
+      setStatsCount(recruiterStats.data.length);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -48,14 +50,18 @@ const PermStatsPage = () => {
   const renderRecruiter = (recruiter, index) => {
     return (
       <tr key={index}>
-        <td>{recruiter.RecruiterName}</td>
-        <td className='text-center'>{recruiter.CandidateCalls}</td>
-        <td className='text-center'>{recruiter.ClientCalls}</td>
-        <td className='text-center'>{recruiter.VacanciesCreated}</td>
-        <td className='text-center'>{recruiter.Interviews}</td>
-        <td className='text-center'>{recruiter.Emailed}</td>
-        <td className='text-center'>{recruiter.Offers}</td>
-        <td className='text-center'>{recruiter.Invoiced}</td>
+        <td className='text-center'>{recruiter.ProfileRef}</td>
+        <td className='text-center'>{recruiter.LastName}</td>
+        <td className='text-center'>{recruiter.FirstName}</td>
+        <td className='text-center'>{recruiter.EventDate}</td>
+        <td className='text-center'>{recruiter.EventTime}</td>
+        <td className='text-center'>{recruiter.VacancyStartDate}</td>
+        <td className='text-center'>{recruiter.BookingStartDate}</td>
+        <td className='text-center'>{recruiter.OrganisationName}</td>
+        <td className='text-center'>{recruiter.OpportunityName}</td>
+        <td className='text-center'>{recruiter.VacancyRef}</td>
+        <td className='text-center'>{recruiter.EventType}</td>
+        <td className='text-center'>{recruiter.RecruiterName}</td>
       </tr>
     );
   };
@@ -85,6 +91,7 @@ const PermStatsPage = () => {
   const handleClearFormClick = () => {
     setStartDate(null);
     setEndDate(null);
+    getRecuiterStats();
   };
 
   useEffect(() => {
@@ -95,8 +102,8 @@ const PermStatsPage = () => {
 
   return (
     <>
-      <Container fluid>
-        <PageHeader Text='Recruiter Stats (Perm)' />
+      <div className='container-fluid'>
+        <PageHeader Text='Recruiter Activity' />
         <DateSearch
           handleClearFormClick={handleClearFormClick}
           onSearchButtonClick={onSearchButtonClick}
@@ -106,25 +113,34 @@ const PermStatsPage = () => {
           handleEndDateChange={handleEndDateChange}
           loading={loading}
         />
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th className='text-center'>Candidate Calls</th>
-              <th className='text-center'>Client Calls</th>
-              <th className='text-center'>Vancancies Created</th>
-              <th className='text-center'>Interviews</th>
-              <th className='text-center'>Emailed</th>
-              <th className='text-center'>Offers</th>
-              <th className='text-center'>Invoiced</th>
-            </tr>
-          </thead>
-          <tbody>{stats.map(renderRecruiter)}</tbody>
-        </table>
-      </Container>
+        {!loading && (
+          <>
+          <span>Count: {statsCount} </span>
+          <table className='table table-striped'>
+            <thead>
+              <tr  className='text-center'>
+                <th>Profile Ref</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Event Date</th>
+                <th>Event Time</th>
+                <th>Vacancy Start Date</th>
+                <th>Booking Start Date</th>
+                <th>Organisation</th>
+                <th>Vacancy</th>
+                <th>Vacancy Ref</th>
+                <th>Event Type</th>
+                <th>Recruiter</th>
+              </tr>
+            </thead>
+            <tbody>{stats.map(renderRecruiter)}</tbody>
+          </table>
+          </>
+        )}
+      </div>
     </>
   );
 };
 
-const PermStats = withRouter(PermStatsPage);
-export default PermStats;
+const RecruitersActivity = withRouter(RecruitersActivityPage);
+export default RecruitersActivity;

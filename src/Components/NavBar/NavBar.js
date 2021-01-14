@@ -21,6 +21,16 @@ class NavBar extends Component {
                 Perm Team
               </a>
             </li>
+            <li className='nav-item'>
+              <a className='nav-link active' href='/recruiters-activity'>
+                Recruiters Activity
+              </a>
+            </li>
+            <li className='nav-item'>
+              <a className='nav-link active' href='/live-vacancies'>
+                Live Vacancies
+              </a>
+            </li>
           </ul>
           <ul className='navbar-nav px-0'>
             <li className='nav-item text-nowrap'>

@@ -1,8 +1,8 @@
 body {
   /* margin: 0; */
-  font-family: 'Open Sans', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Open Sans', sans-serif, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,3 +11,15 @@ body {
   width: 100%;
   margin-left: 10em;
 } */
+
+table.floatThead-table {
+  border-top: none;
+  border-bottom: none;
+  background-color: #fff;
+}
+
+th {
+position: sticky;
+top: 50px;
+background: white;
+}

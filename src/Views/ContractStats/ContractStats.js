@@ -105,7 +105,7 @@ const ContractStatsPage = () => {
           loading={loading}
         />
         {!loading && (
-          <Table>
+          <table className='table table-striped'>
             <thead>
               <tr>
                 <th>Name</th>
@@ -116,7 +116,7 @@ const ContractStatsPage = () => {
               </tr>
             </thead>
             <tbody>{stats.map(renderRecruiter)}</tbody>
-          </Table>
+          </table>
         )}
       </div>
     </>
