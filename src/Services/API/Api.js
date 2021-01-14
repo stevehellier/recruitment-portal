@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const baseUrl = 'http://jmcprofile01:14583';
+const Config = require('../../Config/config.json');
+
+const baseUrl = Config.SERVER_URL;
 
 const Api = () => axios.create({
   baseURL: baseUrl,
