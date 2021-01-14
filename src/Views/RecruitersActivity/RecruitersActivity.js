@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { withRouter } from 'react-router';
 import { PageHeader, DateSearch } from '../../Components';
